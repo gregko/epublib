@@ -226,6 +226,8 @@ public class Resource implements Serializable {
 		return href;
 	}
 
+	public String getOrigHref() { return originalHref; }
+
 	/**
 	 * Sets the Resource's href.
 	 * 

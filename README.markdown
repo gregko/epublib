@@ -1,3 +1,7 @@
+G.Kochaniak: Forked from psiegman/epublib with minimal changes that I needed for my @Voice Aloud Reader Android project.
+Also removed net.sf.jazzlib package and used instead java.util.zip to make the Android app slightly smaller.
+Original README by psiegman follows.
+
 # epublib
 Epublib is a java library for reading/writing/manipulating epub files.
 

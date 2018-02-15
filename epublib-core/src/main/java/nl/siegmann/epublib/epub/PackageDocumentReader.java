@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -47,6 +48,14 @@ public class PackageDocumentReader extends PackageDocumentBase {
 	
 	
 	public static void read(Resource packageResource, EpubReader epubReader, Book book, Resources resources) throws UnsupportedEncodingException, SAXException, IOException, ParserConfigurationException {
+		String s = new String(packageResource.getData(), "UTF-8");
+		if (s.contains(" mlns=\"http://www.idpf.org/2007/opf\"")) { // GKochaniak
+			// fix incorrect epub in .opf file containing:
+			// <package version="2.0" unique-identifier="PrimaryID" mlns="http://www.idpf.org/2007/opf">
+			// instead of (...) xmlns="http://www.idpf.org/2007/opf"
+			s = s.replace(" mlns=\"http://www.idpf.org/2007/opf\"", " xmlns=\"http://www.idpf.org/2007/opf\"");
+			packageResource.setData(s.getBytes());
+		}
 		Document packageDocument = ResourceUtil.getAsDocument(packageResource);
 		String packageHref = packageResource.getHref();
 		resources = fixHrefs(packageHref, resources);

@@ -103,7 +103,7 @@ public class LazyResource extends Resource {
 		
 		if ( data == null ) {
 			
-			LOG.debug("Initializing lazy resource " + filename + "#" + this.getHref() );
+			//LOG.debug("Initializing lazy resource " + filename + "#" + this.getHref() );
 			
 			InputStream in = getResourceStream();
 			byte[] readData = IOUtil.toByteArray(in, (int) this.cachedSize);

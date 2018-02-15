@@ -1,16 +1,5 @@
 package nl.siegmann.epublib.epub;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-
-import net.sf.jazzlib.ZipEntry;
-import net.sf.jazzlib.ZipException;
-import net.sf.jazzlib.ZipFile;
-import net.sf.jazzlib.ZipInputStream;
 import nl.siegmann.epublib.domain.LazyResource;
 import nl.siegmann.epublib.domain.MediaType;
 import nl.siegmann.epublib.domain.Resource;
@@ -18,9 +7,19 @@ import nl.siegmann.epublib.domain.Resources;
 import nl.siegmann.epublib.service.MediatypeService;
 import nl.siegmann.epublib.util.CollectionUtil;
 import nl.siegmann.epublib.util.ResourceUtil;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipException;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 /**
  * Loads Resources from inputStreams, ZipFiles, etc
@@ -45,33 +44,37 @@ public class ResourcesLoader {
 	 * @throws IOException
 	 */
 	public static Resources loadResources(ZipFile zipFile, String defaultHtmlEncoding,
-			List<MediaType> lazyLoadedTypes) throws IOException {		
+										  List<MediaType> lazyLoadedTypes) throws IOException {
 				
 		Resources result = new Resources();
         Enumeration<? extends ZipEntry> entries = zipFile.entries();
 
-        while( entries.hasMoreElements() ) {
-            ZipEntry zipEntry = entries.nextElement();
+        if (entries != null) { // GKochaniak - got crash report with entries == null here...
+			while( entries.hasMoreElements() ) {
+				ZipEntry zipEntry = entries.nextElement();
 
-			if(zipEntry == null || zipEntry.isDirectory()) {
-				continue;
+				if(zipEntry == null || zipEntry.isDirectory()) {
+					continue;
+				}
+
+				String href = zipEntry.getName();
+
+				Resource resource;
+
+				if (shouldLoadLazy(href, lazyLoadedTypes)) {
+					resource = new LazyResource(zipFile.getName(), zipEntry.getSize(), href);
+				} else {
+						InputStream is = zipFile.getInputStream(zipEntry);
+						resource = ResourceUtil.createResource(zipEntry, is);
+						is.close();
+				}
+
+				if(resource.getMediaType() == MediatypeService.XHTML) {
+					resource.setInputEncoding(defaultHtmlEncoding);
+				}
+				result.add(resource);
 			}
-			
-			String href = zipEntry.getName();
-			
-			Resource resource;
-			
-			if (shouldLoadLazy(href, lazyLoadedTypes)) {
-				resource = new LazyResource(zipFile.getName(), zipEntry.getSize(), href);								
-			} else {		
-				resource = ResourceUtil.createResource(zipEntry, zipFile.getInputStream(zipEntry));
-			}
-			
-			if(resource.getMediaType() == MediatypeService.XHTML) {
-				resource.setInputEncoding(defaultHtmlEncoding);
-			}
-			result.add(resource);
-		}
+        }
 		
 		return result;
 	}
@@ -147,7 +150,7 @@ public class ResourcesLoader {
 	 * Loads the contents of all ZipEntries into memory.
 	 * Is fast, but may lead to memory problems when reading large books on devices with small amounts of memory.
 	 * 
-	 * @param in
+	 * @param zipFile
 	 * @param defaultHtmlEncoding
 	 * @return
 	 * @throws IOException

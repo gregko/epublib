@@ -70,4 +70,17 @@ public class TitledResourceReference extends ResourceReference implements Serial
 	public void setResource(Resource resource) {
 		setResource(resource, null);
 	}
+
+	/**
+	 * Added by GKochaniak
+	 */
+	public String getReferenceId() {
+		if (resource != null) {
+			if (fragmentId == null || "".equals(fragmentId))
+				return resource.getId();
+			return resource.getId() + "#" + fragmentId;
+		}
+		return null;
+	}
+
 }
