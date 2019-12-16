@@ -123,7 +123,7 @@ public class LazyResource extends Resource {
 	private InputStream getResourceStream() throws FileNotFoundException,
 			IOException {
 		ZipFile zipFile = new ZipFile(filename);
-		ZipEntry zipEntry = zipFile.getEntry(originalHref);
+		ZipEntry zipEntry = zipFile.getEntry(originalHref); // originalHref is dir/filename in sip, e.g. "OEBPS/toc.ncx", could find it with ZipInputStream too.
 		if (zipEntry == null) {
 			zipFile.close();
 			throw new IllegalStateException("Cannot find entry " + originalHref + " in epub file " + filename);
