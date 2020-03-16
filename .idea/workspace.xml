@@ -36,7 +36,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../jsoup" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -106,6 +106,7 @@
       <workItem from="1575828634651" duration="38000" />
       <workItem from="1576431215582" duration="2221000" />
       <workItem from="1582806656362" duration="141000" />
+      <workItem from="1584311557159" duration="31000" />
     </task>
     <servers />
   </component>
@@ -113,26 +114,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1739" height="636" key="GridCell.Tab.0.bottom" timestamp="1575425836793">
-      <screen x="80" y="0" width="3360" height="1440" />
+    <state x="783" y="585" key="FileChooserDialogImpl" timestamp="1584311585477">
+      <screen x="93" y="0" width="3347" height="1440" />
     </state>
-    <state width="1739" height="636" key="GridCell.Tab.0.bottom/3520.0.1840.1080/80.0.3360.1440@80.0.3360.1440" timestamp="1575425836793" />
-    <state width="1739" height="636" key="GridCell.Tab.0.center" timestamp="1575425836793">
-      <screen x="80" y="0" width="3360" height="1440" />
-    </state>
-    <state width="1739" height="636" key="GridCell.Tab.0.center/3520.0.1840.1080/80.0.3360.1440@80.0.3360.1440" timestamp="1575425836793" />
-    <state width="1739" height="636" key="GridCell.Tab.0.left" timestamp="1575425836793">
-      <screen x="80" y="0" width="3360" height="1440" />
-    </state>
-    <state width="1739" height="636" key="GridCell.Tab.0.left/3520.0.1840.1080/80.0.3360.1440@80.0.3360.1440" timestamp="1575425836793" />
-    <state width="1739" height="636" key="GridCell.Tab.0.right" timestamp="1575425836793">
-      <screen x="80" y="0" width="3360" height="1440" />
-    </state>
-    <state width="1739" height="636" key="GridCell.Tab.0.right/3520.0.1840.1080/80.0.3360.1440@80.0.3360.1440" timestamp="1575425836793" />
-    <state x="1666" y="582" width="586" height="478" key="find.popup" timestamp="1575424146836">
-      <screen x="80" y="0" width="3360" height="1440" />
-    </state>
-    <state x="1666" y="582" width="586" height="478" key="find.popup/3520.0.1840.1080/80.0.3360.1440@80.0.3360.1440" timestamp="1575424146836" />
+    <state x="783" y="585" key="FileChooserDialogImpl/3533.0.1827.1080/93.0.3347.1440@93.0.3347.1440" timestamp="1584311585477" />
     <state x="666" y="495" width="672" height="678" key="search.everywhere.popup" timestamp="1576435327315">
       <screen x="80" y="0" width="3360" height="1440" />
     </state>
